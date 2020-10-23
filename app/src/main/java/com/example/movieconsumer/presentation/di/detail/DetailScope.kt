@@ -1,4 +1,7 @@
 package com.example.movieconsumer.presentation.di.detail
 
-class DetailScope {
-}
+import javax.inject.Scope
+
+@Scope
+@kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
+annotation class DetailScope
