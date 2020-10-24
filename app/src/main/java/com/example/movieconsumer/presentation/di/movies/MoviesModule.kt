@@ -10,9 +10,10 @@ import dagger.Provides
 class MoviesModule {
     @MoviesScope
     @Provides
-    fun provideMovieViewModelFactory(
+    fun provideMoviesViewModelFactory(
         getMoviesUseCase: GetMoviesUseCase,
-        loadMoreMoviesUseCase: LoadMoreMoviesUseCase): MoviesViewModelFactory {
+        loadMoreMoviesUseCase: LoadMoreMoviesUseCase
+    ): MoviesViewModelFactory {
         return MoviesViewModelFactory(getMoviesUseCase, loadMoreMoviesUseCase)
     }
 }

@@ -1,8 +1,8 @@
 package com.example.movieconsumer.data.api
 
+import com.example.movieconsumer.data.model.Trailer.TrailersList
+import com.example.movieconsumer.data.model.actor.ActorsList
 import com.example.movieconsumer.data.model.movie.MovieList
-import com.example.tmdbclient.data.model.artist.Actor
-import com.example.tmdbclient.data.model.artist.ActorList
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -15,9 +15,15 @@ interface TMDBService {
         @Query("page") page: Int
     ): Response<MovieList>
 
-    @GET("movie/{movieId}/credits}")
+    @GET("movie/{movieId}/credits")
     suspend fun getArtistsFromMovie(
-        @Query("api_key") apiKey: String,
-        @Query("movieId") movieId: Int
-    ): Response<List<Actor>>
+        @Path("movieId") movieId: Int,
+        @Query("api_key") apiKey: String
+    ): Response<ActorsList>
+
+    @GET("movie/{movieId}/videos")
+    suspend fun getTrailersForMovie(
+        @Path("movieId") movieId: Int,
+        @Query("api_key") apiKey: String
+    ): Response<TrailersList>
 }
