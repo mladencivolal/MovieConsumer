@@ -1,19 +1,23 @@
-package com.example.tmdbclient.data.model.artist
+package com.example.movieconsumer.data.model.actor
 
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "popular_artists")
 data class Actor(
-    @PrimaryKey
+    @SerializedName("cast_id")
+    val castId: Int,
+    @SerializedName("character")
+    val character: String,
+    @SerializedName("credit_id")
+    val creditId: String,
+    @SerializedName("gender")
+    val gender: Int,
     @SerializedName("id")
     val id: Int,
     @SerializedName("name")
     val name: String,
-    @SerializedName("popularity")
-    val popularity: Double,
+    @SerializedName("order")
+    val order: Int,
     @SerializedName("profile_path")
     val profilePath: String
 )

@@ -19,6 +19,7 @@ class DetailActivity : AppCompatActivity() {
     private lateinit var detailViewModel: DetailViewModel
     private lateinit var binding: ActivityDetailBinding
     private lateinit var adapter: ActorsAdapter
+    private lateinit var trailerAdapter: TrailersAdapter
     private lateinit var actor: Actor
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,8 +39,10 @@ class DetailActivity : AppCompatActivity() {
 
     private fun initRecyclerView() {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = ActorsAdapter(binding.recyclerView)
-        binding.recyclerView.adapter = adapter
+        //adapter = ActorsAdapter(binding.recyclerView)
+        trailerAdapter = TrailersAdapter()
+        //binding.recyclerView.adapter = adapter
+        binding.recyclerView.adapter = trailerAdapter
     }
 
     private fun populateWithIntentData() {
@@ -50,7 +53,8 @@ class DetailActivity : AppCompatActivity() {
                 .load(moviePoster)
                 .into(binding.movieImage)
 
-            getActorsFromMovie(movieId)
+            //getActorsFromMovie(movieId)
+        getTrailersForMovie(movieId)
     }
 
     private fun getActorsFromMovie(movieId:Int) {
@@ -59,6 +63,17 @@ class DetailActivity : AppCompatActivity() {
             if (it != null) {
                 Log.i("recproblem", "ima nesto u listi: ${it.size}")
                 adapter.setList(it)
+            }
+        })
+    }
+
+    private fun getTrailersForMovie(movieId:Int) {
+        val responseLiveData = detailViewModel.getTrailersForMovie(movieId)
+        responseLiveData.observe(this, {
+            if (it != null) {
+                Log.i("recproblem", "ima nesto u listi: ${it.size}")
+                //adapter.setList(it)
+                trailerAdapter.setList(it)
             }
         })
     }
