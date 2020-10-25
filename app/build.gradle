@@ -20,6 +20,8 @@ android {
         buildConfigField "String", "API_KEY","\"fea6a69ff7391818240b67fa3bb83786\""
         //base url
         buildConfigField "String", "BASE_URL","\"https://api.themoviedb.org/3/\""
+        //YouTube API key
+        buildConfigField "String", "YT_KEY","\"AIzaSyCeg9ErGW2jU4Ds12HUCyzwTRKdO4I3lAI\""
     }
 
     buildTypes {
@@ -41,6 +43,7 @@ android {
 }
 
 dependencies {
+    implementation files('libs\\YouTubeAndroidPlayerApi.jar')
     def lifecycle_version = "2.2.0"
     def arch_version = "2.1.0"
     def room_version = "2.2.5"
@@ -97,5 +100,8 @@ dependencies {
     implementation 'me.zhanghai.android.materialprogressbar:library:1.6.1'
     //Recyclerview fastscroller
     implementation 'com.quiph.ui:recyclerviewfastscroller:0.2.3'
+
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.5'
+
 
 }

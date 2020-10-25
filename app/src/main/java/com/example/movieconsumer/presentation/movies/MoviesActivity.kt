@@ -105,7 +105,6 @@ class MoviesActivity : AppCompatActivity(), MoviesAdapter.OnLoadMoreListener,
     private fun launchDetailActivity(movie: Movie) {
         val intent = Intent(this, DetailActivity::class.java)
             .putExtra("movieId", movie.id)
-            .putExtra("movieBackground", movie.backdropPath)
         startActivity(intent)
     }
 

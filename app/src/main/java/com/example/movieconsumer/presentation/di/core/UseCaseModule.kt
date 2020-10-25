@@ -2,10 +2,7 @@ package com.example.movieconsumer.presentation.di.core
 
 import com.example.movieconsumer.domain.repository.DetailRepository
 import com.example.movieconsumer.domain.repository.MoviesRepository
-import com.example.movieconsumer.domain.usecase.GetActorsFromMovieUseCase
-import com.example.movieconsumer.domain.usecase.GetMoviesUseCase
-import com.example.movieconsumer.domain.usecase.GetTrailersForMovieUseCase
-import com.example.movieconsumer.domain.usecase.LoadMoreMoviesUseCase
+import com.example.movieconsumer.domain.usecase.*
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
@@ -22,6 +19,12 @@ class UseCaseModule {
     @Provides
     fun provideLoadMoreMoviesUseCase(moviesRepository: MoviesRepository): LoadMoreMoviesUseCase {
         return LoadMoreMoviesUseCase(moviesRepository)
+    }
+
+    @Singleton
+    @Provides
+    fun provideGetMovieDetailsUseCase(detailRepository: DetailRepository):GetMovieDetailsUseCase {
+        return GetMovieDetailsUseCase(detailRepository)
     }
 
     @Singleton

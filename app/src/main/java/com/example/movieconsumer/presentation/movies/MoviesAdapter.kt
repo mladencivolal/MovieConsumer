@@ -103,8 +103,10 @@ class MoviesAdapter(recyclerView: RecyclerView) :
             binding.imageView.setOnClickListener {
                 onItemClickListener.onItemClick(moviesList[bindingAdapterPosition], it)
             }
-            binding.titleTextView.text = movie.title
-            binding.descriptionTextView.text = movie.overview
+            binding.titleTextView.text = shortenString(movie.title, 25)
+            binding.descriptionTextView.text = shortenString(movie.overview, 200)
+            binding.tvRating.text = "${movie.voteAverage}/10"
+            binding.tvYear.text = "(${movie.releaseDate.substring(0, 4)})"
             val posterURL = "https://image.tmdb.org/t/p/w342" + movie.posterPath
             Glide.with(binding.imageView.context)
                 .load(posterURL)
@@ -114,5 +116,18 @@ class MoviesAdapter(recyclerView: RecyclerView) :
         override fun onClick(p0: View?) {
             TODO("Not yet implemented")
         }
+    }
+
+    private fun shortenString(input: String, length: Int): String {
+        var text = input
+        if (input.length >= length) {
+            text = input.substring(0..length-1)
+
+            if (text.endsWith(" ") || text.endsWith(",")) {
+               text.removeRange(text.length - 2, text.length - 1)
+            }
+            text+="..."
+        }
+        return text
     }
 }
