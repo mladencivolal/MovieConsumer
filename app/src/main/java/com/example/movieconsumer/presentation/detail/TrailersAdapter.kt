@@ -29,44 +29,14 @@ class TrailersAdapter : RecyclerView.Adapter<TrailersAdapter.MyViewHolder>() {
     ) :
         RecyclerView.ViewHolder(binding.root), View.OnClickListener {
 
-        init {
-           /* itemView.setOnClickListener(this)
-            binding.ytView.settings.javaScriptEnabled = true
-            binding.ytView.webChromeClient = object : WebChromeClient() {
-            }*/
-        }
-
         fun bind(trailer: Trailer) {
-         /*   val youtubeLink =
-                "<iframe width=\"100%\" height=\"100%\" src=\"https://www" +
-                        ".youtube.com/embed/${trailer.key}\"  frameborder=\"0\" allowfullscreen></iframe>"
-            val link = "<iframe width=\"100%\" height=\"100%\" src=\"https://www.shacknews.com/\" frameborder=\"0\" allowfullscreen></iframe>"
-            binding.ytView.setBackgroundResource(android.R.color.black)
-            binding.ytView.loadData(youtubeLink, "text/html", "utf-8")*/
-            //binding.ytView.vide
-            val iFramePlayerOptions = IFramePlayerOptions.Builder()
-                .controls(1)
-                .build()
-
-            val youTubePlayerListener = object : AbstractYouTubePlayerListener() {
+            binding.ytView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
                 override fun onReady(youTubePlayer: YouTubePlayer) {
                     val videoId = trailer.key
-                    // youTubePlayer.loadVideo(videoId, 0f)
                     youTubePlayer.cueVideo(videoId, 0f)
-                    // youTubePlayer.pause()
                 }
-            }
-            binding.ytView.enableAutomaticInitialization = false
-            binding.ytView.initialize(youTubePlayerListener, false, iFramePlayerOptions)
-
-          /*  binding.ytView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
-                override fun onReady(youTubePlayer: YouTubePlayer) {
-                    val videoId = trailer.key
-                    // youTubePlayer.loadVideo(videoId, 0f)
-                    youTubePlayer.cueVideo(videoId, 0f)
-                    // youTubePlayer.pause()
-                }
-            })*/
+            })
+            binding.tvTrailerTitle.text = trailer.name
         }
 
         override fun onClick(p0: View?) {
