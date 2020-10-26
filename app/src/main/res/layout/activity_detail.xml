@@ -213,7 +213,7 @@
                     android:layout_height="20dp"
                     android:layout_weight="1"
                     android:textStyle="bold"
-                    android:background="@color/primary_background"
+                    android:background="@color/darker_text"
                     android:text="@string/cast"
                     android:textSize="12sp" />
 
