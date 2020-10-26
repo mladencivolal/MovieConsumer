@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:textAlignment="viewStart"
-            android:textColor="@color/grey"
+            android:textColor="@color/darker_text"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

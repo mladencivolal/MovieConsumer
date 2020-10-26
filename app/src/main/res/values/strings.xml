@@ -1,12 +1,20 @@
 <resources>
     <string name="app_name">MovieConsumer</string>
-    <string name="title_text"></string>
-    <string name="content_text"></string>
-    <string name="your_title_text"></string>
-
     <string name="detail_activity_title">%1$s (%2$s)</string>
     <string name="detail_activity_duration_genre">%1$smin • %2$s</string>
-    <string name="detail_activity_rating">%1$s/10</string>
-    <string name="detail_activity_votes">(%1$s votes)</string>
+    <string name="detail_activity_rating">\u0020%1$s/10</string>
+    <string name="detail_activity_votes">\u0020%1$s votes</string>
     <string name="detail_activity_poster_link">https://image.tmdb.org/t/p/w342%1$s</string>
+
+    <string name="movie_activity_year">(%1$s)</string>
+    <string name="movie_activity_poster_link">https://image.tmdb.org/t/p/w342%1$s</string>
+    <string name="movie_activity_actor_character">\u0020as %1$s</string>
+
+    <string name="original_title">Original Title</string>
+    <string name="release_date">Release Date</string>
+    <string name="spoken">Spoken</string>
+    <string name="budget">Budget</string>
+    <string name="revenue">Revenue</string>
+    <string name="cast">CAST</string>
+    <string name="trailers">TRAILERS</string>
 </resources>

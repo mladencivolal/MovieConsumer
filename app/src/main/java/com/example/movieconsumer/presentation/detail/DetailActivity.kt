@@ -56,7 +56,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
             bntCast.setOnClickListener(this@DetailActivity)
             bntTrailers.setOnClickListener(this@DetailActivity)
             recyclerView.layoutManager = LinearLayoutManager(this@DetailActivity)
-            adapter = ActorsAdapter(recyclerView)
+            adapter = ActorsAdapter(this@DetailActivity)
             recyclerView.adapter = adapter
         }
     }
@@ -139,13 +139,15 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         binding.apply {
             when (p0) {
                 bntCast -> {
-                    adapter = ActorsAdapter(recyclerView)
+                    adapter = ActorsAdapter(this@DetailActivity)
                     recyclerView.adapter = adapter
-                    getActorsFromMovie(movieId)
+                    if (adapter.itemCount == 0) {
+                        getActorsFromMovie(movieId)
+                    }
                     bntCast.setBackgroundColor(
                         ContextCompat.getColor(
                             applicationContext,
-                            R.color.grey
+                            R.color.darker_text
                         )
                     )
                     bntTrailers.setBackgroundColor(
@@ -156,13 +158,15 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
                     )
                 }
                 bntTrailers -> {
-                    trailerAdapter = TrailersAdapter()
-                    recyclerView.adapter = trailerAdapter
-                    getTrailersForMovie(movieId)
+                        trailerAdapter = TrailersAdapter()
+                        recyclerView.adapter = trailerAdapter
+                    if(trailerAdapter.itemCount == 0) {
+                        getTrailersForMovie(movieId)
+                    }
                     bntTrailers.setBackgroundColor(
                         ContextCompat.getColor(
                             applicationContext,
-                            R.color.grey
+                            R.color.darker_text
                         )
                     )
                     bntCast.setBackgroundColor(

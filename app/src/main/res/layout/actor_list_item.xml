@@ -35,7 +35,7 @@
             android:textSize="12sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/grey"
+            android:textColor="@color/darker_text"
             app:layout_constraintBottom_toBottomOf="@id/actor_name"
             app:layout_constraintStart_toEndOf="@id/actor_name"
              />

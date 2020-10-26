@@ -1,7 +1,7 @@
 package com.example.movieconsumer.presentation.detail
 
+import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -9,33 +9,23 @@ import com.bumptech.glide.Glide
 import com.example.movieconsumer.R
 import com.example.movieconsumer.data.model.actor.Actor
 import com.example.movieconsumer.databinding.ActorListItemBinding
-import com.example.movieconsumer.presentation.movies.MoviesAdapter
 
-class ActorsAdapter(recyclerView: RecyclerView)  : RecyclerView.Adapter<ActorsAdapter.MyViewHolder>(){
+class ActorsAdapter(private val context: Context) : RecyclerView.Adapter<ActorsAdapter.MyViewHolder>() {
     private val actorsList: MutableList<Actor> = mutableListOf()
-    lateinit var onItemClickListener: MoviesAdapter.OnItemClickListener
     lateinit var binding: ActorListItemBinding
 
     inner class MyViewHolder(
         val binding: ActorListItemBinding,
     ) :
-        RecyclerView.ViewHolder(binding.root), View.OnClickListener {
-
-        init {
-            itemView.setOnClickListener(this)
-        }
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(actor: Actor) {
             binding.actorName.text = actor.name
-            binding.tvCharacter.text = " as ${actor.character}"
+            binding.tvCharacter.text = context.resources.getString(R.string.movie_activity_actor_character, actor.character)
             val imageURL = "https://image.tmdb.org/t/p/w45" + actor.profilePath
             Glide.with(binding.actorImage.context)
                 .load(imageURL)
                 .into(binding.actorImage)
-        }
-
-        override fun onClick(p0: View?) {
-            TODO("Not yet implemented")
         }
     }
 
@@ -51,7 +41,8 @@ class ActorsAdapter(recyclerView: RecyclerView)  : RecyclerView.Adapter<ActorsAd
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.bind(actorsList[position])    }
+        holder.bind(actorsList[position])
+    }
 
     override fun getItemCount(): Int = actorsList.size
 

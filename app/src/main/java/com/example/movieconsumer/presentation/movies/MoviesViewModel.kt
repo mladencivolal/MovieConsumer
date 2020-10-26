@@ -1,6 +1,5 @@
 package com.example.movieconsumer.presentation.movies
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.example.movieconsumer.data.model.movie.Movie

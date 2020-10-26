@@ -7,16 +7,30 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name= "AppTheme2" parent= "AppTheme" >
-        <item name= "android:textViewStyle" > @style/RobotoTextViewStyle </item>
-        <item name= "android:buttonStyle" > @style/RobotoButtonStyle </item>
+    <style name="MovieConsumerTheme" parent="AppTheme">
+        <item name="android:textViewStyle">@style/MovieConsumerTextViewStyle</item>
+        <item name="android:buttonStyle">@style/MovieConsumerButtonStyle</item>
+        <item name="android:ratingBarStyle">@style/MovieConsumerRatingBarStyle</item>
     </style>
 
-
-    <style name= "RobotoTextViewStyle" parent= "android:Widget.TextView" >
-        <item name= "android:fontFamily" > @font/roboto_light </item>
+    <style name="MovieConsumerTextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/roboto_light</item>
+        <item name="android:textColor">#FFF</item>
+        <item name="android:paddingTop">@dimen/textview_padding_top</item>
+        <item name="android:paddingBottom">@dimen/textview_padding_bottom</item>
     </style>
-    <style name= "RobotoButtonStyle" parent= "android:Widget.Holo.Button" >
-        <item name= "android:fontFamily" > @font/roboto_light </item>
+
+    <style name="MovieConsumerButtonStyle" parent="android:Widget.Holo.Button">
+        <item name="android:fontFamily">@font/roboto_light</item>
+        <item name="android:paddingTop">@dimen/textview_padding_top</item>
+        <item name="android:paddingBottom">@dimen/textview_padding_bottom</item>
+    </style>
+
+    <style name="MovieConsumerRatingBarStyle" parent="Widget.AppCompat.RatingBar.Small">
+        <item name="android:paddingTop">@dimen/global_padding</item>
+        <item name="android:paddingBottom">@dimen/textview_padding_bottom</item>
+        <item name="android:numStars">10</item>
+        <item name="android:progressBackgroundTint">@color/darker_text</item>
+        <item name="android:progressTint">@color/colorAccent</item>
     </style>
 </resources>
