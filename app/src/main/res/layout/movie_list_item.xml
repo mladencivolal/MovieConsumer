@@ -8,14 +8,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="5dp"
-        android:layout_marginEnd="5dp"
-        android:layout_marginBottom="5dp"
+        android:layout_marginStart="@dimen/cardview_margin"
+        android:layout_marginTop="@dimen/cardview_margin"
+        android:layout_marginEnd="@dimen/cardview_margin"
         android:clickable="true"
         android:focusable="true"
         app:cardBackgroundColor="@color/colorPrimary"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="20dp">
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        app:cardElevation="@dimen/card_elevation">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/list_item_layout"
@@ -26,11 +26,10 @@
                 android:id="@+id/title_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
+                android:paddingStart="@dimen/global_padding"
+                android:paddingTop="@dimen/global_padding"
+                android:paddingEnd="@dimen/has_next_text"
                 android:paddingBottom="10dp"
-                android:paddingLeft="10dp"
-                android:paddingRight="3dp"
-                android:text="TextView"
                 android:textColor="@android:color/background_light"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -41,36 +40,34 @@
                 android:id="@+id/tvYear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:paddingEnd="0dp"
+                android:paddingTop="@dimen/global_padding"
+                android:paddingBottom="@dimen/global_padding"
                 android:textColor="@android:color/background_light"
-                android:textSize="14sp"
+                android:textSize="@dimen/text_medium"
                 app:layout_constraintStart_toEndOf="@id/title_text_view"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
             <ImageView
                 android:id="@+id/ivStar"
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="3dp"
-                android:layout_marginBottom="10dp"
+                android:layout_width="@dimen/rating_star_image"
+                android:layout_height="@dimen/rating_star_image"
+                android:layout_marginTop="@dimen/global_margin"
+                android:layout_marginEnd="@dimen/has_next_text"
+                android:layout_marginBottom="@dimen/global_margin"
                 android:src="@drawable/ic_star"
                 app:layout_constraintBottom_toTopOf="@id/imageView"
                 app:layout_constraintEnd_toStartOf="@id/tvRating"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/tvRating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:paddingEnd="10dp"
-                android:paddingBottom="10dp"
-                android:textColor="#FFF"
-                android:textSize="14sp"
+                android:padding="@dimen/global_padding"
+                android:textColor="@color/light_text"
+                android:textSize="@dimen/text_medium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -81,16 +78,16 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/title_text_view"
-                tools:srcCompat="@tools:sample/avatars" />
+                tools:srcCompat="@tools:sample/avatars"
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/description_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="TextView"
-                android:textColor="@android:color/background_light"
-                android:textSize="14sp"
+                android:padding="@dimen/global_padding"
+                android:textColor="@color/light_text"
+                android:textSize="@dimen/text_medium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/imageView" />

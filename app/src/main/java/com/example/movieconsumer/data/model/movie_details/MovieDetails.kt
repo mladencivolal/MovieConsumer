@@ -28,10 +28,6 @@ data class MovieDetails(
     val popularity: Double,
     @SerializedName("poster_path")
     val posterPath: String,
-    @SerializedName("production_companies")
-    val productionCompanies: List<ProductionCompany>,
-    @SerializedName("production_countries")
-    val productionCountries: List<ProductionCountry>,
     @SerializedName("release_date")
     val releaseDate: String,
     @SerializedName("revenue")
