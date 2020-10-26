@@ -27,7 +27,7 @@ class ActorsAdapter(recyclerView: RecyclerView)  : RecyclerView.Adapter<ActorsAd
 
         fun bind(actor: Actor) {
             binding.actorName.text = actor.name
-            binding.tvCharacter.text = actor.character
+            binding.tvCharacter.text = " as ${actor.character}"
             val imageURL = "https://image.tmdb.org/t/p/w45" + actor.profilePath
             Glide.with(binding.actorImage.context)
                 .load(imageURL)

@@ -11,6 +11,8 @@
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/actor_image"
+            app:civ_border_color="@color/colorAccent"
+            app:civ_border_width="0.2dp"
             android:layout_width="40dp"
             android:layout_height="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -19,7 +21,7 @@
 
         <TextView
             android:id="@+id/actor_name"
-            android:layout_marginLeft="5dp"
+            android:layout_margin="10dp"
             android:textSize="14sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,13 +32,13 @@
 
         <TextView
             android:id="@+id/tvCharacter"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/grey"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="@id/actor_name"
+            app:layout_constraintStart_toEndOf="@id/actor_name"
+             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

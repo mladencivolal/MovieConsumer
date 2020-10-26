@@ -2,8 +2,11 @@
     <string name="app_name">MovieConsumer</string>
     <string name="title_text"></string>
     <string name="content_text"></string>
-    <string name="your_title_text" ></string>
+    <string name="your_title_text"></string>
 
-    <string name="dropdown_title_text">Far away from behind</string>
-    <string name="dropdown_content_text">Buying the right telescope to take your love of astronomy to the next level is a big next step in the development of your passion for the stars. In many ways, it is a big step from someone who is just fooling around with astronomy to a serious student of the science.</string>
+    <string name="detail_activity_title">%1$s (%2$s)</string>
+    <string name="detail_activity_duration_genre">%1$smin • %2$s</string>
+    <string name="detail_activity_rating">%1$s/10</string>
+    <string name="detail_activity_votes">(%1$s votes)</string>
+    <string name="detail_activity_poster_link">https://image.tmdb.org/t/p/w342%1$s</string>
 </resources>

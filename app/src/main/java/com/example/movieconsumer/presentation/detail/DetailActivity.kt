@@ -1,11 +1,9 @@
 package com.example.movieconsumer.presentation.detail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,6 +11,8 @@ import com.bumptech.glide.Glide
 import com.example.movieconsumer.R
 import com.example.movieconsumer.data.model.movie_details.MovieDetails
 import com.example.movieconsumer.databinding.ActivityDetailBinding
+import com.example.movieconsumer.helpers.dateFormatter
+import com.example.movieconsumer.helpers.formatCurrency
 import com.example.movieconsumer.presentation.di.Injector
 import kotlinx.android.synthetic.main.trailer_list_item.*
 import kotlinx.coroutines.CoroutineScope
@@ -20,17 +20,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class DetailActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
+class DetailActivity : AppCompatActivity(), View.OnClickListener {
     @Inject
     lateinit var factory: DetailViewModelFactory
     private lateinit var detailViewModel: DetailViewModel
     private lateinit var binding: ActivityDetailBinding
     private lateinit var adapter: ActorsAdapter
     private lateinit var trailerAdapter: TrailersAdapter
-    lateinit var movieDetails: MovieDetails
+    private lateinit var movieDetails: MovieDetails
     private var movieId: Int = 0
-    var adapters = arrayOf("Cast", "Trailers")
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,58 +40,78 @@ class DetailActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         detailViewModel = ViewModelProvider(this, factory)
             .get(DetailViewModel::class.java)
 
-        binding.adapterSpinner.onItemSelectedListener = this
-
-        // Create an ArrayAdapter using a simple spinner layout and languages array
-        val aa = ArrayAdapter(this, android.R.layout.simple_spinner_item, adapters)
-        // Set layout to use when the list of choices appear
-        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        // Set Adapter to Spinner
-        binding.adapterSpinner.adapter = aa
-
-        initRecyclerView()
-
+        initUI()
         populateWithIntentData()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        ytView.release()
+        if (ytView != null) {
+            ytView.release()
+        }
     }
 
-    private fun initRecyclerView() {
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = ActorsAdapter(binding.recyclerView)
-        binding.recyclerView.adapter = adapter
+    private fun initUI() {
+        binding.apply {
+            bntCast.setOnClickListener(this@DetailActivity)
+            bntTrailers.setOnClickListener(this@DetailActivity)
+            recyclerView.layoutManager = LinearLayoutManager(this@DetailActivity)
+            adapter = ActorsAdapter(recyclerView)
+            recyclerView.adapter = adapter
+        }
     }
 
     private fun populateWithIntentData() {
         movieId = intent.getIntExtra("movieId", 0)
         CoroutineScope(Dispatchers.Main).launch {
             movieDetails = detailViewModel.getMovieDetails(movieId)
-
             binding.apply {
-                val moviePoster =
-                    "https://image.tmdb.org/t/p/w342" + movieDetails.backdropPath
-                Glide.with(movieImage.context)
-                    .load(moviePoster)
-                    .into(movieImage)
-                tvTitle.text = movieDetails.title
-                tvHeader.text =
-                    "${movieDetails.runtime}min • ${movieDetails.genres.joinToString { it.name }}"
-                tvRating.text = "${movieDetails.voteAverage}/10"
-                tvRatingCount.text = "(${movieDetails.voteCount} votes)"
-                tvDescription.text = movieDetails.overview
+                movieDetails.apply {
+                    val moviePoster = resources.getString(
+                        R.string.detail_activity_poster_link,
+                        backdropPath
+                    )
+                    Glide.with(applicationContext)
+                        .load(moviePoster)
+                        .into(movieImage)
+                    tvTitle.text = resources.getString(
+                        R.string.detail_activity_title, title, releaseDate.substring(0, 4)
+                    )
+                    tvHeader.text = resources.getString(
+                        R.string.detail_activity_duration_genre,
+                        runtime.toString(),
+                        genres.joinToString { it.name }
+                    )
+                    tvRating.text =
+                        resources.getString(R.string.detail_activity_rating, voteAverage.toString())
+                    tvRatingCount.text =
+                        resources.getString(R.string.detail_activity_votes, voteCount.toString())
+                    tvDescription.text = overview
+                    tvReleaseDate.text = dateFormatter(releaseDate)
+                    tvOriginalTitle.text = originalTitle
+                    tvSpokenLanguages.text = spokenLanguages.joinToString { it.name }
+                    tvBudget.text = formatCurrency(budget)
+                    tvRevenue.text = formatCurrency(revenue)
+                    ratingBar.rating = voteAverage.toFloat()
 
-
-
-
-                tvReleaseDate.text = movieDetails.releaseDate
-                tvOriginalTitle.text = movieDetails.originalTitle
-                tvSpokenLanguages.text = movieDetails.spokenLanguages.joinToString { it.name }
-                tvBudget.text = "${movieDetails.budget}$"
-                tvRevenue.text = "${movieDetails.revenue}$"
-                ratingBar.rating = movieDetails.voteAverage.toFloat()
+                    if (budget != 0 && revenue != 0) {
+                        if (revenue > budget) {
+                            tvRevenue.setTextColor(
+                                ContextCompat.getColor(
+                                    applicationContext,
+                                    android.R.color.holo_green_light
+                                )
+                            )
+                        } else {
+                            tvRevenue.setTextColor(
+                                ContextCompat.getColor(
+                                    applicationContext,
+                                    android.R.color.holo_red_light
+                                )
+                            )
+                        }
+                    }
+                }
             }
         }
         getActorsFromMovie(movieId)
@@ -103,7 +121,6 @@ class DetailActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         val responseLiveData = detailViewModel.getActorsFromMovie(movieId)
         responseLiveData.observe(this, {
             if (it != null) {
-                Log.i("recproblem", "ima nesto u listi: ${it.size}")
                 adapter.setList(it)
             }
         })
@@ -113,30 +130,50 @@ class DetailActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         val responseLiveData = detailViewModel.getTrailersForMovie(movieId)
         responseLiveData.observe(this, {
             if (it != null) {
-                Log.i("recproblem", "ima nesto u listi: ${it.size}")
-                //adapter.setList(it)
                 trailerAdapter.setList(it)
             }
         })
     }
 
-    override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-        when (p2) {
-            0 -> {
-                adapter = ActorsAdapter(binding.recyclerView)
-                binding.recyclerView.adapter = adapter
-                getActorsFromMovie(movieId)
-            }
-            1 -> {
-                trailerAdapter = TrailersAdapter()
-                binding.recyclerView.adapter = trailerAdapter
-                getTrailersForMovie(movieId)
+    override fun onClick(p0: View?) {
+        binding.apply {
+            when (p0) {
+                bntCast -> {
+                    adapter = ActorsAdapter(recyclerView)
+                    recyclerView.adapter = adapter
+                    getActorsFromMovie(movieId)
+                    bntCast.setBackgroundColor(
+                        ContextCompat.getColor(
+                            applicationContext,
+                            R.color.grey
+                        )
+                    )
+                    bntTrailers.setBackgroundColor(
+                        ContextCompat.getColor(
+                            applicationContext,
+                            android.R.color.black
+                        )
+                    )
+                }
+                bntTrailers -> {
+                    trailerAdapter = TrailersAdapter()
+                    recyclerView.adapter = trailerAdapter
+                    getTrailersForMovie(movieId)
+                    bntTrailers.setBackgroundColor(
+                        ContextCompat.getColor(
+                            applicationContext,
+                            R.color.grey
+                        )
+                    )
+                    bntCast.setBackgroundColor(
+                        ContextCompat.getColor(
+                            applicationContext,
+                            android.R.color.black
+                        )
+                    )
+                }
             }
         }
-    }
-
-    override fun onNothingSelected(p0: AdapterView<*>?) {
-        TODO("Not yet implemented")
     }
 }
 

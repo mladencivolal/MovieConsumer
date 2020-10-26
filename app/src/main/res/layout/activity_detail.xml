@@ -210,17 +210,68 @@
             android:background="#000"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/adapterSpinner"
-                android:layout_width="0dp"
+            <!-- <androidx.appcompat.widget.AppCompatSpinner
+                 android:id="@+id/adapterSpinner"
+                 android:layout_width="0dp"
+                 android:layout_height="wrap_content"
+                 android:backgroundTint="#FFF"
+                 app:flow_horizontalAlign="center"
+                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                 app:layout_constraintBottom_toTopOf="@id/recyclerView"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!-- <ToggleButton
+                 android:id="@+id/toggleAdapter"
+                 android:layout_width="match_parent"
+                 android:layout_height="wrap_content"
+                 android:textColor="#FFF"
+                 android:background="#000"
+                 android:textOff="CAST"
+                 android:textOn="TRAILERS"
+                 app:layout_constraintBottom_toTopOf="@id/recyclerView"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toTopOf="parent" />-->
+
+            <LinearLayout
+                android:id="@+id/buttonsLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#FFF"
-                app:flow_horizontalAlign="center"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                app:layout_constraintBottom_toTopOf="@id/recyclerView"
+                android:padding="10dp"
+                android:orientation="horizontal"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
+
+                <Button
+                    android:id="@+id/bntCast"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:background="#000"
+                    android:layout_weight="1"
+                    android:text="CAST"
+                    android:textSize="12sp"
+                    android:textColor="#FFF" />
+
+                <Button
+                    android:id="@+id/bntTrailers"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_weight="1"
+                    android:textSize="12sp"
+                    android:background="#000"
+                    android:text="TRAILERS"
+                    android:textColor="#FFF" />
+
+            </LinearLayout>
+
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
@@ -229,9 +280,9 @@
                 android:layout_marginBottom="10dp"
                 android:background="#000"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                app:layout_constraintTop_toBottomOf="@id/adapterSpinner"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/buttonsLayout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
