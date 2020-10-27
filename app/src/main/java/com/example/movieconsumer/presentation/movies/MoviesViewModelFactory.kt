@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.movieconsumer.domain.usecase.GetMoviesUseCase
 import com.example.movieconsumer.domain.usecase.LoadMoreMoviesUseCase
 
+@Suppress("UNCHECKED_CAST")
 class MoviesViewModelFactory(
     private val getMoviesUseCase: GetMoviesUseCase,
     private val loadMoreMoviesUseCase: LoadMoreMoviesUseCase

@@ -6,6 +6,7 @@ import com.example.movieconsumer.domain.usecase.GetActorsFromMovieUseCase
 import com.example.movieconsumer.domain.usecase.GetMovieDetailsUseCase
 import com.example.movieconsumer.domain.usecase.GetTrailersForMovieUseCase
 
+@Suppress("UNCHECKED_CAST")
 class DetailViewModelFactory(
     private val getMovieDetailsUseCase: GetMovieDetailsUseCase,
     private val getActorsFromMovieUseCase: GetActorsFromMovieUseCase,

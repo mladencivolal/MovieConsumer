@@ -88,5 +88,10 @@ android {
         implementation 'me.zhanghai.android.materialprogressbar:library:1.6.1'
         //YouTubePlayer
         implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.5'
+
+        implementation 'com.ms-square:expandableTextView:0.1.4'
+
+
+
     }
 }

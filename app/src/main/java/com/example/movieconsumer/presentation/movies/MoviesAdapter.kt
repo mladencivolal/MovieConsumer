@@ -106,7 +106,8 @@ class MoviesAdapter(recyclerView: RecyclerView, val context: Context) :
                 movie.apply {
                     if (layoutManager !is GridLayoutManager) {
                         tvTitle.text = shortenString(title, 25)
-                        descriptionTextView.text = shortenString(overview, 200)
+                        //descriptionTextView.text = shortenString(overview, 200)
+                        etvDescription.text = overview
                         tvRating.text = context.resources.getString(
                             R.string.detail_activity_rating,
                             voteAverage.toString()
@@ -116,15 +117,16 @@ class MoviesAdapter(recyclerView: RecyclerView, val context: Context) :
                             releaseDate.substring(0, 4)
                         )
                     } else {
-                            val param =
-                                listItemLayout.layoutParams as ViewGroup.MarginLayoutParams
-                            param.setMargins(0, 0, 0, 0)
-                            tvTitle.visible(false)
-                            descriptionTextView.visible(false)
-                            tvRating.visible(false)
-                            tvYear.visible(false)
-                            ivStar.visible(false)
-                            listItemLayout.layoutParams = param
+                        val param =
+                            listItemLayout.layoutParams as ViewGroup.MarginLayoutParams
+                        param.setMargins(0, 0, 0, 0)
+                        tvTitle.visible(false)
+                        //descriptionTextView.visible(false)
+                        etvDescription.visible(false)
+                        tvRating.visible(false)
+                        tvYear.visible(false)
+                        ivStar.visible(false)
+                        listItemLayout.layoutParams = param
                     }
                     val posterURL =
                         context.resources.getString(

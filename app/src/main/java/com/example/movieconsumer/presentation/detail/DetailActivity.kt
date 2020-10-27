@@ -18,11 +18,11 @@ import com.example.movieconsumer.databinding.ActivityDetailBinding
 import com.example.movieconsumer.helpers.dateFormatter
 import com.example.movieconsumer.helpers.formatCurrency
 import com.example.movieconsumer.presentation.di.Injector
-import kotlinx.android.synthetic.main.trailer_list_item.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 
 class DetailActivity : AppCompatActivity(), View.OnClickListener {
     @Inject
@@ -46,13 +46,6 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
 
         initUI()
         populateWithIntentData()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        if (ytView != null) {
-            ytView.release()
-        }
     }
 
     private fun initUI() {
@@ -91,7 +84,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
                         resources.getString(R.string.detail_activity_rating, voteAverage.toString())
                     tvRatingCount.text =
                         resources.getString(R.string.detail_activity_votes, voteCount.toString())
-                    tvDescription.text = overview
+                    etvDescription.text = overview
                     tvReleaseDate.text = dateFormatter(releaseDate)
                     tvOriginalTitle.text = originalTitle
                     tvSpokenLanguages.text = spokenLanguages.joinToString { it.name }
@@ -206,7 +199,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
         }
     }
 
-    fun shareMovie() {
+    private fun shareMovie() {
         val intent = Intent()
         intent.apply {
             action = Intent.ACTION_SEND
