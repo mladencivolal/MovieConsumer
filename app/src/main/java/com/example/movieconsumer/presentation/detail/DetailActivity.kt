@@ -1,7 +1,10 @@
 package com.example.movieconsumer.presentation.detail
 
+import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -169,9 +172,8 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
                 bntTrailers -> {
                     trailerAdapter = TrailersAdapter()
                     recyclerView.adapter = trailerAdapter
-                    if (trailerAdapter.itemCount == 0) {
-                        getTrailersForMovie(movieId)
-                    }
+                    if (trailerAdapter.itemCount == 0) getTrailersForMovie(movieId)
+
                     bntTrailers.setBackgroundColor(
                         ContextCompat.getColor(
                             applicationContext,
@@ -192,6 +194,41 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.detail_menu, menu)
         return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_share -> {
+                shareMovie()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    fun shareMovie() {
+        val intent = Intent()
+        intent.apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_SUBJECT, "Hey Check out this movie!")
+            putExtra(
+                Intent.EXTRA_TEXT, TextUtils.concat(
+                    resources.getString(
+                        R.string.detail_activity_title,
+                        movieDetails.title,
+                        movieDetails.releaseDate.substring(0, 4)
+                    ), resources.getString(
+                        R.string.detail_activity_share_description,
+                        movieDetails.overview
+                    ), "\n\n", resources.getString(
+                        R.string.detail_activity_share_imdb,
+                        movieDetails.imdbId
+                    )
+                )
+            )
+            type = "text/plain"
+        }
+        startActivity(Intent.createChooser(intent, "Share To:"))
     }
 }
 

@@ -5,8 +5,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.GridLayout
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -115,12 +113,12 @@ class MoviesActivity : AppCompatActivity(), MoviesAdapter.OnLoadMoreListener,
             R.id.action_show_as -> {
                 initRecyclerView(showAsGrid)
                 discoverMovies()
-                if (showAsGrid) {
+                showAsGrid = if (showAsGrid) {
                     item.setIcon(R.drawable.ic_list)
-                    showAsGrid = !showAsGrid
+                    !showAsGrid
                 } else {
                     item.setIcon(R.drawable.ic_grid)
-                    showAsGrid = !showAsGrid
+                    !showAsGrid
                 }
                 return true
             }

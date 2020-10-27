@@ -5,6 +5,8 @@
     <string name="detail_activity_rating">\u0020%1$s/10</string>
     <string name="detail_activity_votes">\u0020%1$s votes</string>
     <string name="detail_activity_poster_link">https://image.tmdb.org/t/p/w342%1$s</string>
+    <string name="detail_activity_share_imdb">https://www.imdb.com/title/%1$s</string>
+    <string name="detail_activity_share_description">\n\n%1$s\n</string>
 
     <string name="movie_activity_year">(%1$s)</string>
     <string name="movie_activity_poster_link">https://image.tmdb.org/t/p/w342%1$s</string>
