@@ -6,6 +6,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingStart="@dimen/cardview_margin"
+        android:paddingEnd="@dimen/cardview_margin"
         android:background="@color/primary_background"
         tools:context=".presentation.movie.MovieActivity">
 
