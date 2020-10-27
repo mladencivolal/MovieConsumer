@@ -228,7 +228,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
             )
             type = "text/plain"
         }
-        startActivity(Intent.createChooser(intent, "Share To:"))
+        startActivity(Intent.createChooser(intent, "Share With:"))
     }
 }
 
