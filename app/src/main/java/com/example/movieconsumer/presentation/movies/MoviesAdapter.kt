@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,12 +25,13 @@ class MoviesAdapter(recyclerView: RecyclerView, val context: Context) :
     var layoutManager: LinearLayoutManager
 
     init {
-        val buffer = 5
+        var buffer = 5
 
-        layoutManager = if (recyclerView.layoutManager is LinearLayoutManager) {
-            recyclerView.layoutManager as LinearLayoutManager
+        if (recyclerView.layoutManager is LinearLayoutManager) {
+            layoutManager = recyclerView.layoutManager as LinearLayoutManager
         } else {
-            recyclerView.layoutManager as GridLayoutManager
+            layoutManager = recyclerView.layoutManager as GridLayoutManager
+            buffer = 24
         }
 
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -68,7 +68,6 @@ class MoviesAdapter(recyclerView: RecyclerView, val context: Context) :
         loading = isLoading
     }
 
-
     interface OnLoadMoreListener {
         fun onLoadMore()
     }
@@ -76,7 +75,6 @@ class MoviesAdapter(recyclerView: RecyclerView, val context: Context) :
     interface OnItemClickListener {
         fun onItemClick(movie: Movie, view: View)
     }
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -106,7 +104,6 @@ class MoviesAdapter(recyclerView: RecyclerView, val context: Context) :
                 movie.apply {
                     if (layoutManager !is GridLayoutManager) {
                         tvTitle.text = shortenString(title, 25)
-                        //descriptionTextView.text = shortenString(overview, 200)
                         etvDescription.text = overview
                         tvRating.text = context.resources.getString(
                             R.string.detail_activity_rating,
@@ -120,13 +117,13 @@ class MoviesAdapter(recyclerView: RecyclerView, val context: Context) :
                         val param =
                             listItemLayout.layoutParams as ViewGroup.MarginLayoutParams
                         param.setMargins(0, 0, 0, 0)
+                        listItemLayout.layoutParams = param
+
                         tvTitle.visible(false)
-                        //descriptionTextView.visible(false)
                         etvDescription.visible(false)
                         tvRating.visible(false)
                         tvYear.visible(false)
                         ivStar.visible(false)
-                        listItemLayout.layoutParams = param
                     }
                     val posterURL =
                         context.resources.getString(
