@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#000</color>
-    <color name="colorPrimaryDark">#000</color>
-    <color name="colorAccent">#F5FF09</color>
+    <color name="colorPrimary">@color/primary_background</color>
+    <color name="colorPrimaryDark">@color/primary_background</color>
+    <color name="colorAccent">#FFDE00</color>
 
-    <color name="primary_background">#000</color>
+    <color name="primary_background">#E6000000</color>
+    <color name="translucent_primary">#B3000000</color>
+    <color name="secondary_background">#000000</color>
     <color name="darker_text">#BEBEBE</color>
     <color name="light_text">#FFF</color>
 </resources>

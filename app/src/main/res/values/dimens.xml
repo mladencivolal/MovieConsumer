@@ -17,5 +17,6 @@
    <dimen name="card_corner_radius">5dp</dimen>
    <dimen name="cardview_margin">5dp</dimen>
    <dimen name="has_next_text">3dp</dimen>
+   <dimen name="zero">0dp</dimen>
 
 </resources>

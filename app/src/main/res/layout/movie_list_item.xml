@@ -13,7 +13,7 @@
         android:layout_marginEnd="@dimen/cardview_margin"
         android:clickable="true"
         android:focusable="true"
-        app:cardBackgroundColor="@color/colorPrimary"
+        app:cardBackgroundColor="@color/translucent_primary"
         app:cardCornerRadius="@dimen/card_corner_radius"
         app:cardElevation="@dimen/card_elevation">
 
@@ -66,10 +66,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/global_padding"
+                android:paddingStart="@dimen/zero"
                 android:textColor="@color/light_text"
                 android:textSize="@dimen/text_medium"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="RtlSymmetry" />
 
             <ImageView
                 android:id="@+id/imageView"
