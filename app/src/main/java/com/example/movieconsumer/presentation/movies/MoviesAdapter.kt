@@ -1,13 +1,9 @@
 package com.example.movieconsumer.presentation.movies
 
-import android.app.ActionBar
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.GridLayout
-import androidx.core.view.marginBottom
-import androidx.core.view.setMargins
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,7 +15,7 @@ import com.example.movieconsumer.databinding.MovieListItemBinding
 import com.example.movieconsumer.helpers.shortenString
 import com.example.movieconsumer.helpers.visible
 
-class MoviesAdapter(private val recyclerView: RecyclerView, val context: Context) :
+class MoviesAdapter(recyclerView: RecyclerView, val context: Context) :
     RecyclerView.Adapter<MoviesAdapter.MyViewHolder>() {
     private val moviesList: MutableList<Movie> = mutableListOf()
     private var loading: Boolean = false
@@ -29,12 +25,12 @@ class MoviesAdapter(private val recyclerView: RecyclerView, val context: Context
     var layoutManager: LinearLayoutManager
 
     init {
-        var buffer = 5
+        val buffer = 5
 
-        if (recyclerView.layoutManager is LinearLayoutManager) {
-            layoutManager = recyclerView.layoutManager as LinearLayoutManager
+        layoutManager = if (recyclerView.layoutManager is LinearLayoutManager) {
+            recyclerView.layoutManager as LinearLayoutManager
         } else {
-            layoutManager = recyclerView.layoutManager as GridLayoutManager
+            recyclerView.layoutManager as GridLayoutManager
         }
 
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -95,22 +91,6 @@ class MoviesAdapter(private val recyclerView: RecyclerView, val context: Context
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bind(moviesList[position])
-        if (recyclerView.layoutManager is GridLayoutManager) {
-            binding.titleTextView.visible(false)
-            binding.descriptionTextView.visible(false)
-            binding.tvRating.visible(false)
-            binding.tvYear.visible(false)
-            binding.ivStar.visible(false)
-            /*binding.cardView.radius = 0f
-            val param = binding.cardView.layoutParams as ViewGroup.MarginLayoutParams
-            param.setMargins(0, 0, 0, 0)
-
-            binding.cardView.layoutParams = param*/
-            val param = binding.listItemLayout.layoutParams as ViewGroup.MarginLayoutParams
-            param.setMargins(0, 0, 0, 0)
-
-            binding.listItemLayout.layoutParams = param
-        }
     }
 
     override fun getItemCount(): Int = moviesList.size
@@ -123,7 +103,7 @@ class MoviesAdapter(private val recyclerView: RecyclerView, val context: Context
         fun bind(movie: Movie) {
             binding.apply {
                 movie.apply {
-                    if(layoutManager !is GridLayoutManager) {
+                    if (layoutManager !is GridLayoutManager) {
                         titleTextView.text = shortenString(title, 25)
                         descriptionTextView.text = shortenString(overview, 200)
                         tvRating.text = context.resources.getString(
@@ -134,6 +114,16 @@ class MoviesAdapter(private val recyclerView: RecyclerView, val context: Context
                             R.string.movie_activity_year,
                             releaseDate.substring(0, 4)
                         )
+                    } else {
+                            val param =
+                                listItemLayout.layoutParams as ViewGroup.MarginLayoutParams
+                            param.setMargins(0, 0, 0, 0)
+                            titleTextView.visible(false)
+                            descriptionTextView.visible(false)
+                            tvRating.visible(false)
+                            tvYear.visible(false)
+                            ivStar.visible(false)
+                            listItemLayout.layoutParams = param
                     }
                     val posterURL =
                         context.resources.getString(
