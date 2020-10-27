@@ -9,8 +9,8 @@
 
     <style name="MovieConsumerTheme" parent="AppTheme">
         <item name="android:textViewStyle">@style/MovieConsumerTextViewStyle</item>
-        <item name="android:buttonStyle">@style/MovieConsumerButtonStyle</item>
         <item name="android:ratingBarStyle">@style/MovieConsumerRatingBarStyle</item>
+        <item name="android:buttonStyle">@style/MovieConsumerButtonStyle</item>
     </style>
 
     <style name="MovieConsumerTextViewStyle" parent="android:Widget.TextView">
@@ -20,7 +20,7 @@
         <item name="android:paddingBottom">@dimen/textview_padding_bottom</item>
     </style>
 
-    <style name="MovieConsumerButtonStyle" parent="android:Widget.Holo.Button">
+    <style name="MovieConsumerButtonStyle" parent="android:Widget.Material.Button">
         <item name="android:fontFamily">@font/roboto_light</item>
         <item name="android:paddingTop">@dimen/textview_padding_top</item>
         <item name="android:paddingBottom">@dimen/textview_padding_bottom</item>

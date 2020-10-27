@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -104,7 +105,7 @@ class MoviesAdapter(recyclerView: RecyclerView, val context: Context) :
             binding.apply {
                 movie.apply {
                     if (layoutManager !is GridLayoutManager) {
-                        titleTextView.text = shortenString(title, 25)
+                        tvTitle.text = shortenString(title, 25)
                         descriptionTextView.text = shortenString(overview, 200)
                         tvRating.text = context.resources.getString(
                             R.string.detail_activity_rating,
@@ -118,7 +119,7 @@ class MoviesAdapter(recyclerView: RecyclerView, val context: Context) :
                             val param =
                                 listItemLayout.layoutParams as ViewGroup.MarginLayoutParams
                             param.setMargins(0, 0, 0, 0)
-                            titleTextView.visible(false)
+                            tvTitle.visible(false)
                             descriptionTextView.visible(false)
                             tvRating.visible(false)
                             tvYear.visible(false)
@@ -130,12 +131,12 @@ class MoviesAdapter(recyclerView: RecyclerView, val context: Context) :
                             R.string.movie_activity_poster_link,
                             posterPath
                         )
-                    imageView.setOnClickListener {
+                    Glide.with(ivMovie.context)
+                        .load(posterURL)
+                        .into(ivMovie)
+                    ivMovie.setOnClickListener {
                         onItemClickListener.onItemClick(moviesList[adapterPosition], it)
                     }
-                    Glide.with(imageView.context)
-                        .load(posterURL)
-                        .into(imageView)
                 }
             }
         }

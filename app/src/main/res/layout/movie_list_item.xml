@@ -11,7 +11,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/title_text_view"
+                android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/global_padding"
@@ -32,7 +32,7 @@
                 android:paddingBottom="@dimen/global_padding"
                 android:textColor="@android:color/background_light"
                 android:textSize="@dimen/text_medium"
-                app:layout_constraintStart_toEndOf="@id/title_text_view"
+                app:layout_constraintStart_toEndOf="@id/tvTitle"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -44,7 +44,7 @@
                 android:layout_marginEnd="@dimen/has_next_text"
                 android:layout_marginBottom="@dimen/global_margin"
                 android:src="@drawable/ic_star"
-                app:layout_constraintBottom_toTopOf="@id/imageView"
+                app:layout_constraintBottom_toTopOf="@id/ivMovie"
                 app:layout_constraintEnd_toStartOf="@id/tvRating"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="ContentDescription" />
@@ -62,12 +62,12 @@
                 tools:ignore="RtlSymmetry" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/ivMovie"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/title_text_view"
+                app:layout_constraintTop_toBottomOf="@id/tvTitle"
                 tools:ignore="ContentDescription"
                 tools:srcCompat="@tools:sample/avatars" />
 
@@ -80,6 +80,6 @@
                 android:textSize="@dimen/text_medium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageView" />
+                app:layout_constraintTop_toBottomOf="@id/ivMovie" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

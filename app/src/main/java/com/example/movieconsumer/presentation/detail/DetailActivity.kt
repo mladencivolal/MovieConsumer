@@ -1,6 +1,7 @@
 package com.example.movieconsumer.presentation.detail
 
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -73,7 +74,8 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
                     )
                     Glide.with(applicationContext)
                         .load(moviePoster)
-                        .into(movieImage)
+                        .into(ivMovie)
+
                     tvTitle.text = resources.getString(
                         R.string.detail_activity_title, title, releaseDate.substring(0, 4)
                     )
@@ -90,8 +92,15 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
                     tvReleaseDate.text = dateFormatter(releaseDate)
                     tvOriginalTitle.text = originalTitle
                     tvSpokenLanguages.text = spokenLanguages.joinToString { it.name }
-                    tvBudget.text = formatCurrency(budget)
-                    tvRevenue.text = formatCurrency(revenue)
+
+                    val formattedBudget =
+                        if (budget == 0) "Not available" else formatCurrency(budget)
+                    tvBudget.text = formattedBudget
+
+                    val formattedRevenue =
+                        if (revenue == 0) "Not available" else formatCurrency(revenue)
+                    tvRevenue.text = formattedRevenue
+
                     ratingBar.rating = voteAverage.toFloat()
 
                     if (budget != 0 && revenue != 0) {
@@ -147,7 +156,7 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
                     bntCast.setBackgroundColor(
                         ContextCompat.getColor(
                             applicationContext,
-                            R.color.darker_text
+                            R.color.button_checked
                         )
                     )
                     bntTrailers.setBackgroundColor(
@@ -158,15 +167,15 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
                     )
                 }
                 bntTrailers -> {
-                        trailerAdapter = TrailersAdapter()
-                        recyclerView.adapter = trailerAdapter
-                    if(trailerAdapter.itemCount == 0) {
+                    trailerAdapter = TrailersAdapter()
+                    recyclerView.adapter = trailerAdapter
+                    if (trailerAdapter.itemCount == 0) {
                         getTrailersForMovie(movieId)
                     }
                     bntTrailers.setBackgroundColor(
                         ContextCompat.getColor(
                             applicationContext,
-                            R.color.darker_text
+                            R.color.button_checked
                         )
                     )
                     bntCast.setBackgroundColor(
@@ -178,6 +187,11 @@ class DetailActivity : AppCompatActivity(), View.OnClickListener {
                 }
             }
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.detail_menu, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 }
 

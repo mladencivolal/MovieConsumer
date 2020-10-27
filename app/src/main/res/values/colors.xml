@@ -9,4 +9,5 @@
     <color name="secondary_background">#000000</color>
     <color name="darker_text">#BEBEBE</color>
     <color name="light_text">#FFF</color>
+    <color name="button_checked">#33FFDE00</color>
 </resources>

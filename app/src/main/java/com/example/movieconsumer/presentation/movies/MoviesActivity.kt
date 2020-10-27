@@ -44,19 +44,19 @@ class MoviesActivity : AppCompatActivity(), MoviesAdapter.OnLoadMoreListener,
 
     private fun initRecyclerView(showGrid: Boolean) {
         if (showGrid) {
-            binding.movieRecyclerView.layoutManager = GridLayoutManager(this, 3)
+            binding.recyclerView.layoutManager = GridLayoutManager(this, 3)
         } else {
-            binding.movieRecyclerView.layoutManager = LinearLayoutManager(this)
+            binding.recyclerView.layoutManager = LinearLayoutManager(this)
         }
 
-        moviesAdapter = MoviesAdapter(binding.movieRecyclerView, this)
+        moviesAdapter = MoviesAdapter(binding.recyclerView, this)
 
         moviesAdapter.apply {
             onLoadMoreListener = this@MoviesActivity
             onItemClickListener = this@MoviesActivity
         }
         binding.apply {
-            movieRecyclerView.apply {
+            recyclerView.apply {
                 adapter = moviesAdapter
                 setHasFixedSize(true)
                 setItemViewCacheSize(50)
@@ -70,21 +70,21 @@ class MoviesActivity : AppCompatActivity(), MoviesAdapter.OnLoadMoreListener,
             if (it != null) {
                 moviesAdapter.setList(it)
                 moviesAdapter.notifyDataSetChanged()
-                binding.movieProgressBar.visible(false)
+                binding.progressBar.visible(false)
             } else {
-                binding.movieProgressBar.visible(false)
+                binding.progressBar.visible(false)
             }
         })
     }
 
     private fun loadMoreMovies() {
-        binding.movieProgressBar.visible(true)
+        binding.progressBar.visible(true)
         val responseLiveData = moviesViewModel.loadMoreMovies()
         responseLiveData.observe(this, {
             if (it != null) {
                 moviesAdapter.setIsLoading(false)
                 if (it.size > 5) moviesAdapter.updateList(it)
-                binding.movieProgressBar.visible(false)
+                binding.progressBar.visible(false)
             }
         })
     }
@@ -95,7 +95,7 @@ class MoviesActivity : AppCompatActivity(), MoviesAdapter.OnLoadMoreListener,
 
     override fun onItemClick(movie: Movie, view: View) {
         when (view.id) {
-            R.id.imageView -> launchDetailActivity(movie)
+            R.id.ivMovie -> launchDetailActivity(movie)
         }
     }
 

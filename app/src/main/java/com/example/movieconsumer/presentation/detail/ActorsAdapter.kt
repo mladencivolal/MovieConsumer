@@ -20,12 +20,13 @@ class ActorsAdapter(private val context: Context) : RecyclerView.Adapter<ActorsA
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(actor: Actor) {
-            binding.actorName.text = actor.name
-            binding.tvCharacter.text = context.resources.getString(R.string.movie_activity_actor_character, actor.character)
+            binding.tvActor.text = actor.name
+            val character = if(actor.character.isEmpty()) "Unknown" else actor.character
+            binding.tvCharacter.text = context.resources.getString(R.string.movie_activity_actor_character, character)
             val imageURL = "https://image.tmdb.org/t/p/w45" + actor.profilePath
-            Glide.with(binding.actorImage.context)
+            Glide.with(binding.ivActor.context)
                 .load(imageURL)
-                .into(binding.actorImage)
+                .into(binding.ivActor)
         }
     }
 
